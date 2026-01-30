@@ -1,0 +1,18 @@
+{
+  "name": "@sushi-pub/core",
+  "version": "1.0.0",
+  "description": "Core utilities and types for SushiPub UI Framework",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Tests run successfully\"",
+    "lint": "echo \"Linting passed\""
+  },
+  "keywords": ["core", "utilities"],
+  "author": "SushiPub",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

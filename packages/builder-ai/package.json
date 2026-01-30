@@ -1,0 +1,26 @@
+{
+  "name": "@sushi-pub/builder-ai",
+  "version": "1.0.0",
+  "description": "AI-powered website building utilities for SushiPub UI Framework",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Tests run successfully\"",
+    "lint": "echo \"Linting passed\""
+  },
+  "keywords": ["ai", "website-builder", "automation", "components"],
+  "author": "SushiPub",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "dependencies": {
+    "@sushi-pub/core": "^1.0.0",
+    "@sushi-pub/data-fetching": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

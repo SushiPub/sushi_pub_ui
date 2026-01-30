@@ -2,6 +2,7 @@
   "name": "@sushi-pub/ui-framework",
   "version": "1.0.0",
   "description": "A comprehensive UI framework with packages for data fetching, SEO, sitemap generation, and AI-powered website building",
+  "type": "module",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -9,7 +10,9 @@
   "scripts": {
     "build": "npm run build --workspaces",
     "test": "npm run test --workspaces",
-    "lint": "npm run lint --workspaces"
+    "lint": "npm run lint --workspaces",
+    "demo:core": "node demo/core-demo.js",
+    "demo:sitemap": "node demo/sitemap-demo.js"
   },
   "keywords": [
     "ui-framework",

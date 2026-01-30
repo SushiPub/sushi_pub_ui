@@ -154,12 +154,10 @@ export function generateStructuredData(data: any): string {
  * React component for structured data (JSON-LD)
  */
 export const StructuredData: React.FC<{ data: any }> = ({ data }) => {
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: generateStructuredData(data) }}
-    />
-  );
+  return React.createElement('script', {
+    type: 'application/ld+json',
+    dangerouslySetInnerHTML: { __html: generateStructuredData(data) },
+  });
 };
 
 export default {

@@ -62,11 +62,16 @@ export async function fetchData<T = any>(
 
     const data = await response.json();
 
+    const headers: Record<string, string> = {};
+    response.headers.forEach((value, key) => {
+      headers[key] = value;
+    });
+
     const result: ApiResponse<T> = {
       data,
       status: response.status,
       statusText: response.statusText,
-      headers: Object.fromEntries(response.headers.entries()),
+      headers,
     };
 
     // Cache the result if enabled

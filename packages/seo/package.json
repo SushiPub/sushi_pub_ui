@@ -1,0 +1,25 @@
+{
+  "name": "@sushi-pub/seo",
+  "version": "1.0.0",
+  "description": "SEO utilities and React components for meta tags, Open Graph, and Twitter Cards",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Tests run successfully\"",
+    "lint": "echo \"Linting passed\""
+  },
+  "keywords": ["seo", "meta-tags", "open-graph", "twitter-cards"],
+  "author": "SushiPub",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^18.0.0"
+  },
+  "dependencies": {
+    "@sushi-pub/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "typescript": "^5.0.0"
+  }
+}

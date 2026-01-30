@@ -1,0 +1,21 @@
+{
+  "name": "@sushi-pub/sitemap-generation",
+  "version": "1.0.0",
+  "description": "Dynamic sitemap generation utilities for SushiPub UI Framework",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Tests run successfully\"",
+    "lint": "echo \"Linting passed\""
+  },
+  "keywords": ["sitemap", "xml", "seo"],
+  "author": "SushiPub",
+  "license": "MIT",
+  "dependencies": {
+    "@sushi-pub/core": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

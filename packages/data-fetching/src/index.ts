@@ -60,6 +60,11 @@ export async function fetchData<T = any>(
       body: config?.body ? JSON.stringify(config.body) : undefined,
     });
 
+    // Check for HTTP errors
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const data = await response.json();
 
     const headers: Record<string, string> = {};
@@ -98,6 +103,9 @@ export function useFetch<T = any>(
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
+  // Serialize config to avoid dependency issues
+  const configKey = JSON.stringify(config);
+
   const fetch = useCallback(async () => {
     if (!url) return;
 
@@ -105,14 +113,15 @@ export function useFetch<T = any>(
     setError(null);
 
     try {
-      const response = await fetchData<T>(url, config);
+      const parsedConfig = configKey ? JSON.parse(configKey) : undefined;
+      const response = await fetchData<T>(url, parsedConfig);
       setData(response.data);
     } catch (err) {
       setError(err as Error);
     } finally {
       setLoading(false);
     }
-  }, [url, config]);
+  }, [url, configKey]);
 
   useEffect(() => {
     fetch();
@@ -136,14 +145,18 @@ export function useMutation<T = any, V = any>(
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<Error | null>(null);
 
+  // Serialize config to avoid dependency issues
+  const configKey = JSON.stringify(config);
+
   const mutate = useCallback(
     async (variables: V, method: 'POST' | 'PUT' | 'DELETE' | 'PATCH' = 'POST') => {
       setLoading(true);
       setError(null);
 
       try {
+        const parsedConfig = configKey ? JSON.parse(configKey) : undefined;
         const response = await fetchData<T>(url, {
-          ...config,
+          ...parsedConfig,
           method,
           body: variables,
         });
@@ -156,7 +169,7 @@ export function useMutation<T = any, V = any>(
         setLoading(false);
       }
     },
-    [url, config]
+    [url, configKey]
   );
 
   return { data, loading, error, mutate };

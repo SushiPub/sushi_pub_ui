@@ -28,8 +28,15 @@ export interface SeoConfig {
 
 /**
  * Update document meta tags
+ * Note: This function is browser-only and will not work in server-side rendering (SSR) environments
  */
 export function updateMetaTags(config: SeoConfig): void {
+  // Guard for SSR environments
+  if (typeof document === 'undefined') {
+    logger.warn('updateMetaTags called in non-browser environment');
+    return;
+  }
+
   // Update title
   if (config.title) {
     document.title = config.title;
@@ -133,9 +140,13 @@ export function updateMetaTags(config: SeoConfig): void {
  * React component for SEO meta tags
  */
 export const SEO: React.FC<SeoConfig> = (props) => {
+  // Serialize props to avoid dependency issues
+  const propsKey = JSON.stringify(props);
+
   useEffect(() => {
-    updateMetaTags(props);
-  }, [props]);
+    const parsedProps = JSON.parse(propsKey);
+    updateMetaTags(parsedProps);
+  }, [propsKey]);
 
   return null;
 };

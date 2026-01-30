@@ -149,13 +149,17 @@ export function useAIComponentGenerator(config?: AIConfig) {
   const [error, setError] = useState<Error | null>(null);
   const [suggestions, setSuggestions] = useState<ComponentTemplate[]>([]);
 
+  // Serialize config to avoid dependency issues
+  const configKey = JSON.stringify(config);
+
   const generate = useCallback(
     async (prompt: string) => {
       setLoading(true);
       setError(null);
 
       try {
-        const result = await generateComponentSuggestions(prompt, config);
+        const parsedConfig = configKey ? JSON.parse(configKey) : undefined;
+        const result = await generateComponentSuggestions(prompt, parsedConfig);
         setSuggestions(result);
         return result;
       } catch (err) {
@@ -165,7 +169,7 @@ export function useAIComponentGenerator(config?: AIConfig) {
         setLoading(false);
       }
     },
-    [config]
+    [configKey]
   );
 
   return { suggestions, loading, error, generate };
@@ -179,13 +183,17 @@ export function useAIPageGenerator(config?: AIConfig) {
   const [error, setError] = useState<Error | null>(null);
   const [page, setPage] = useState<PageStructure | null>(null);
 
+  // Serialize config to avoid dependency issues
+  const configKey = JSON.stringify(config);
+
   const generate = useCallback(
     async (description: string) => {
       setLoading(true);
       setError(null);
 
       try {
-        const result = await generatePageStructure(description, config);
+        const parsedConfig = configKey ? JSON.parse(configKey) : undefined;
+        const result = await generatePageStructure(description, parsedConfig);
         setPage(result);
         return result;
       } catch (err) {
@@ -195,7 +203,7 @@ export function useAIPageGenerator(config?: AIConfig) {
         setLoading(false);
       }
     },
-    [config]
+    [configKey]
   );
 
   return { page, loading, error, generate };
